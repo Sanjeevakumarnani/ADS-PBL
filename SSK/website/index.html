@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorting Algorithm Analyzer</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ───────────── NAVBAR ───────────── -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <span class="logo-icon">⟨/⟩</span>
+    <span>SortViz</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#algorithms">Algorithms</a></li>
+    <li><a href="#visualizer">Visualizer</a></li>
+    <li><a href="#analyzer">Analyzer</a></li>
+    <li><a href="#complexity">Complexity</a></li>
+  </ul>
+  <div class="nav-badge">ADS Mini-Project</div>
+</nav>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero" id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Advanced Data Structures · C Language</div>
+    <h1 class="hero-title">
+      Comparison-Based<br>
+      <span class="gradient-text">Sorting Algorithm</span><br>
+      Analyzer
+    </h1>
+    <p class="hero-sub">
+      Visualize, compare, and analyze 6 classic sorting algorithms.<br>
+      Track comparisons, swaps, and execution time — all in real time.
+    </p>
+    <div class="hero-btns">
+      <a href="#visualizer" class="btn-primary">▶ Launch Visualizer</a>
+      <a href="#analyzer"   class="btn-outline">📊 Run Analyzer</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">6</span><span class="stat-lbl">Algorithms</span></div>
+      <div class="stat"><span class="stat-num">3</span><span class="stat-lbl">Metrics</span></div>
+      <div class="stat"><span class="stat-num">10K</span><span class="stat-lbl">Max Elements</span></div>
+      <div class="stat"><span class="stat-num">O(n log n)</span><span class="stat-lbl">Best Class</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <canvas id="heroCanvas" width="460" height="320"></canvas>
+  </div>
+</section>
+
+<!-- ───────────── ALGORITHMS CARDS ───────────── -->
+<section class="section" id="algorithms">
+  <div class="section-label">The Algorithms</div>
+  <h2 class="section-title">Six Sorting Techniques</h2>
+  <p class="section-sub">Each algorithm uses comparisons to order elements. See how they differ.</p>
+
+  <div class="algo-grid">
+
+    <div class="algo-card" data-algo="bubble">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#f97316,#ef4444)">🫧</div>
+      <h3>Bubble Sort</h3>
+      <p>Repeatedly compares adjacent elements and swaps them if out of order. Simple but slow.</p>
+      <div class="algo-badges">
+        <span class="badge red">O(n²) Worst</span>
+        <span class="badge green">O(n) Best</span>
+        <span class="badge blue">Stable</span>
+        <span class="badge gray">In-place</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>for i in 0..n:<br>&nbsp;&nbsp;for j in 0..n-i-1:<br>&nbsp;&nbsp;&nbsp;&nbsp;if a[j] > a[j+1]: swap</code>
+      </div>
+    </div>
+
+    <div class="algo-card" data-algo="selection">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">🎯</div>
+      <h3>Selection Sort</h3>
+      <p>Selects the minimum from the unsorted part and places it at the front each pass.</p>
+      <div class="algo-badges">
+        <span class="badge red">O(n²) Always</span>
+        <span class="badge purple">Min Swaps</span>
+        <span class="badge gray">In-place</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>for i in 0..n:<br>&nbsp;&nbsp;min = find_min(i..n)<br>&nbsp;&nbsp;swap(a[i], a[min])</code>
+      </div>
+    </div>
+
+    <div class="algo-card" data-algo="insertion">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">📌</div>
+      <h3>Insertion Sort</h3>
+      <p>Inserts each element into its correct position in the already-sorted left portion.</p>
+      <div class="algo-badges">
+        <span class="badge red">O(n²) Worst</span>
+        <span class="badge green">O(n) Best</span>
+        <span class="badge blue">Stable</span>
+        <span class="badge gray">Adaptive</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>for i in 1..n:<br>&nbsp;&nbsp;key = a[i]<br>&nbsp;&nbsp;shift right while a[j]>key</code>
+      </div>
+    </div>
+
+    <div class="algo-card" data-algo="merge">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#10b981,#059669)">🔀</div>
+      <h3>Merge Sort</h3>
+      <p>Divides array in half recursively, then merges sorted halves back together.</p>
+      <div class="algo-badges">
+        <span class="badge green">O(n log n) Always</span>
+        <span class="badge blue">Stable</span>
+        <span class="badge yellow">O(n) Space</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>merge_sort(a, l, r):<br>&nbsp;&nbsp;mid = (l+r)/2<br>&nbsp;&nbsp;merge(left, right)</code>
+      </div>
+    </div>
+
+    <div class="algo-card" data-algo="quick">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#f59e0b,#f97316)">⚡</div>
+      <h3>Quick Sort</h3>
+      <p>Partitions around a pivot. Fastest in practice with median-of-three pivot selection.</p>
+      <div class="algo-badges">
+        <span class="badge green">O(n log n) Avg</span>
+        <span class="badge red">O(n²) Worst</span>
+        <span class="badge gray">In-place</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>quick_sort(a, lo, hi):<br>&nbsp;&nbsp;p = partition(lo,hi)<br>&nbsp;&nbsp;recurse(lo,p) (p,hi)</code>
+      </div>
+    </div>
+
+    <div class="algo-card" data-algo="heap">
+      <div class="algo-icon" style="background:linear-gradient(135deg,#ec4899,#8b5cf6)">🏔️</div>
+      <h3>Heap Sort</h3>
+      <p>Builds a max-heap then extracts the maximum element one at a time.</p>
+      <div class="algo-badges">
+        <span class="badge green">O(n log n) Always</span>
+        <span class="badge gray">In-place</span>
+        <span class="badge purple">O(1) Space</span>
+      </div>
+      <div class="algo-pseudo">
+        <code>build_max_heap(a)<br>for i = n-1..1:<br>&nbsp;&nbsp;swap(a[0],a[i]); heapify</code>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ───────────── VISUALIZER ───────────── -->
+<section class="section dark-section" id="visualizer">
+  <div class="section-label">Interactive</div>
+  <h2 class="section-title" style="color:#fff">Algorithm Visualizer</h2>
+  <p class="section-sub" style="color:#94a3b8">Watch bars sort themselves in real time. Every comparison and swap is animated.</p>
+
+  <div class="viz-container">
+    <div class="viz-controls">
+      <div class="ctrl-group">
+        <label>Algorithm</label>
+        <select id="algoSelect">
+          <option value="bubble">Bubble Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="insertion">Insertion Sort</option>
+          <option value="merge">Merge Sort</option>
+          <option value="quick">Quick Sort</option>
+          <option value="heap">Heap Sort</option>
+        </select>
+      </div>
+      <div class="ctrl-group">
+        <label>Array Size: <span id="sizeLabel">40</span></label>
+        <input type="range" id="sizeRange" min="10" max="100" value="40"/>
+      </div>
+      <div class="ctrl-group">
+        <label>Speed: <span id="speedLabel">Medium</span></label>
+        <input type="range" id="speedRange" min="1" max="5" value="3"/>
+      </div>
+      <div class="ctrl-group">
+        <label>Array Type</label>
+        <select id="arrayType">
+          <option value="random">Random</option>
+          <option value="nearly">Nearly Sorted</option>
+          <option value="reverse">Reverse Sorted</option>
+          <option value="few">Few Unique</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="viz-stage">
+      <canvas id="vizCanvas" width="860" height="340"></canvas>
+      <div class="viz-info">
+        <div class="viz-stat" id="vizCmp">Comparisons: 0</div>
+        <div class="viz-stat" id="vizSwp">Swaps: 0</div>
+        <div class="viz-stat" id="vizTime">Time: 0 ms</div>
+        <div class="viz-stat" id="vizStatus">Status: Ready</div>
+      </div>
+    </div>
+
+    <div class="viz-btns">
+      <button class="btn-viz" id="btnGenerate">🔀 New Array</button>
+      <button class="btn-viz btn-start" id="btnStart">▶ Start</button>
+      <button class="btn-viz btn-pause" id="btnPause" disabled>⏸ Pause</button>
+      <button class="btn-viz btn-reset" id="btnReset">↺ Reset</button>
+    </div>
+
+    <div class="viz-legend">
+      <span class="leg" style="--c:#60a5fa">■ Unsorted</span>
+      <span class="leg" style="--c:#f97316">■ Comparing</span>
+      <span class="leg" style="--c:#ef4444">■ Swapping</span>
+      <span class="leg" style="--c:#22c55e">■ Sorted</span>
+      <span class="leg" style="--c:#a855f7">■ Pivot</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── ANALYZER ───────────── -->
+<section class="section" id="analyzer">
+  <div class="section-label">Performance</div>
+  <h2 class="section-title">Algorithm Analyzer</h2>
+  <p class="section-sub">Enter your own array or generate random data, then compare all 6 algorithms side-by-side.</p>
+
+  <div class="analyzer-box">
+    <div class="ana-input-row">
+      <div class="ana-input-group">
+        <label>Enter array (comma or space separated)</label>
+        <input type="text" id="manualInput" placeholder="e.g. 64 25 12 22 11 90 45 3 77 55"/>
+      </div>
+      <span class="ana-or">OR</span>
+      <div class="ana-input-group">
+        <label>Random array</label>
+        <div class="ana-rand-row">
+          <input type="number" id="randSize" placeholder="Size" min="1" max="10000" value="20"/>
+          <input type="number" id="randMax"  placeholder="Max val" min="1" max="100000" value="100"/>
+          <button class="btn-sm" id="btnRandom">Generate</button>
+        </div>
+      </div>
+      <button class="btn-primary" id="btnAnalyze">Analyze All ▶</button>
+    </div>
+
+    <div class="ana-preview" id="arrayPreview">
+      <span class="preview-label">Array Preview:</span>
+      <div id="previewBars"></div>
+    </div>
+
+    <div id="resultsArea" style="display:none">
+      <div class="results-header">
+        <h3>Results — <span id="resultSize">0</span> elements</h3>
+        <div class="results-badges" id="resultBadges"></div>
+      </div>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Algorithm</th>
+              <th>Comparisons</th>
+              <th>Swaps / Movements</th>
+              <th>Time (ms)</th>
+              <th>Complexity</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+
+      <div class="chart-row">
+        <div class="chart-box">
+          <div class="chart-title">Comparisons</div>
+          <canvas id="cmpChart" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Swaps / Movements</div>
+          <canvas id="swpChart" height="200"></canvas>
+        </div>
+        <div class="chart-box">
+          <div class="chart-title">Time (ms)</div>
+          <canvas id="timeChart" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── COMPLEXITY ───────────── -->
+<section class="section dark-section" id="complexity">
+  <div class="section-label">Theory</div>
+  <h2 class="section-title" style="color:#fff">Time & Space Complexity</h2>
+
+  <div class="complexity-table-wrap">
+    <table class="complexity-table">
+      <thead>
+        <tr>
+          <th>Algorithm</th>
+          <th>Best</th>
+          <th>Average</th>
+          <th>Worst</th>
+          <th>Space</th>
+          <th>Stable</th>
+          <th>Method</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>🫧 Bubble Sort</td>  <td class="green">O(n)</td>      <td class="red">O(n²)</td>      <td class="red">O(n²)</td>      <td class="green">O(1)</td>     <td>✅</td><td>Exchange</td></tr>
+        <tr><td>🎯 Selection Sort</td><td class="red">O(n²)</td>      <td class="red">O(n²)</td>      <td class="red">O(n²)</td>      <td class="green">O(1)</td>     <td>❌</td><td>Selection</td></tr>
+        <tr><td>📌 Insertion Sort</td><td class="green">O(n)</td>     <td class="red">O(n²)</td>      <td class="red">O(n²)</td>      <td class="green">O(1)</td>     <td>✅</td><td>Insertion</td></tr>
+        <tr><td>🔀 Merge Sort</td>   <td class="yellow">O(n log n)</td><td class="yellow">O(n log n)</td><td class="yellow">O(n log n)</td><td class="red">O(n)</td>  <td>✅</td><td>Divide & Conquer</td></tr>
+        <tr><td>⚡ Quick Sort</td>   <td class="yellow">O(n log n)</td><td class="yellow">O(n log n)</td><td class="red">O(n²)</td>  <td class="yellow">O(log n)</td><td>❌</td><td>Divide & Conquer</td></tr>
+        <tr><td>🏔️ Heap Sort</td>   <td class="yellow">O(n log n)</td><td class="yellow">O(n log n)</td><td class="yellow">O(n log n)</td><td class="green">O(1)</td><td>❌</td><td>Heap</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="insight-cards">
+    <div class="insight">
+      <div class="insight-icon">🏆</div>
+      <h4>Fastest Overall</h4>
+      <p>Quick Sort wins in practice due to excellent cache behavior, despite O(n²) worst case.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">💾</div>
+      <h4>Memory Efficient</h4>
+      <p>Bubble, Selection, Insertion, and Heap Sort all sort in-place with O(1) extra space.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">🔒</div>
+      <h4>Guaranteed O(n log n)</h4>
+      <p>Merge Sort and Heap Sort guarantee O(n log n) in all cases — no bad inputs.</p>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">📐</div>
+      <h4>Nearly Sorted?</h4>
+      <p>Insertion Sort is unbeatable on nearly-sorted data, running close to O(n).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-logo">⟨/⟩ SortViz</div>
+    <p>ADS Mini-Project · Comparison-Based Sorting Algorithm Analyzer · C Language</p>
+    <p style="margin-top:6px;color:#475569">Bubble · Selection · Insertion · Merge · Quick · Heap</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
